@@ -26,10 +26,9 @@ class FeatureSelection(object):
     def auc_score(self, order):
         print(order)
         features = self.columns[1:]
-        features_name = []
-        for index in range(len(order)):
-            if order[index] == 1:
-                features_name.append(features[index])
+        features_name = [
+            features[index] for index in range(len(order)) if order[index] == 1
+        ]
 
         labels = np.array(self.train_data['target'], dtype=np.int8)
         d_train = lgb.Dataset(self.train_data[features_name], label=labels)
@@ -61,7 +60,7 @@ class FeatureSelection(object):
 
     def run(self, n=0):
         distance_list = []
-        generate = [index for index in range(1, n + 1)]
+        generate = list(range(1, n + 1))
         while n > 0:
             self.ga.next()
             # distance = self.auc_score(self.ga.best.gene)
