@@ -114,8 +114,7 @@ class GA(object):
     def next(self):
         """产生下一代"""
         self.judge()
-        newLives = []
-        newLives.append(self.best)  # 把最好的个体加入下一代 #
+        newLives = [self.best]
         newLives[0].gene = copy.deepcopy(self.gene)
         newLives[0].score = copy.deepcopy(self.score)
         while len(newLives) < self.lifeCount:
